@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import TeacherCard from '../../components/TeacherCard';
+import { useState } from "react";
+import TeacherCard from "../../components/TeacherCard";
+import Link from "next/link";
 
 // Sample Data
 const teachersData = [
   {
     id: 1,
-    photo: '/images/Taro.png',
-    name: '山田 太郎',
-    background: '東京音楽大学卒業、ジャズピアニスト',
+    photo: "/images/Taro.png",
+    name: "山田 太郎",
+    background: "東京音楽大学卒業、ジャズピアニスト",
     experience: 5,
     age: 30,
     fee: 3000,
@@ -17,9 +18,9 @@ const teachersData = [
   },
   {
     id: 2,
-    photo: '/images/Hanako.png',
-    name: '佐藤 花子',
-    background: '名古屋音楽院卒業、クラシックバイオリニスト',
+    photo: "/images/Hanako.png",
+    name: "佐藤 花子",
+    background: "名古屋音楽院卒業、クラシックバイオリニスト",
     experience: 8,
     age: 35,
     fee: 3500,
@@ -30,6 +31,13 @@ const teachersData = [
 
 const TeachersPage = () => {
   const [selectedTeachers, setSelectedTeachers] = useState([]);
+  const [isMatched, setIsMatched] = useState(false);
+  const handleMatchConfirmation = () => {
+    setIsMatched(true);
+
+    // ここでサーバー側に選択された先生データを送信する処理を追加することも可能です。
+    console.log("Selected Teachers:", selectedTeachers);
+  };
 
   const handleSelect = (teacherId) => {
     setSelectedTeachers((prevSelected) =>
@@ -67,8 +75,16 @@ const TeachersPage = () => {
               .filter((teacher) => selectedTeachers.includes(teacher.id))
               .map((teacher) => (
                 <li key={teacher.id}>{teacher.name}</li>
-              ))}   
+              ))}
           </ul>
+
+          {/* マッチングを成立させるボタン */}
+          <Link
+            href="/matchingdone"
+            className="mt-4 w-full bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600 transition-colors text-center block"
+          >
+            マッチングを成立させる
+          </Link>
         </div>
       )}
     </div>
