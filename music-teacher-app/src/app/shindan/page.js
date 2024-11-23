@@ -1,5 +1,5 @@
-// pages/diagnostic.js
-"use client"
+"use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const DiagnosticPage = () => {
@@ -10,11 +10,11 @@ const DiagnosticPage = () => {
   const [online, setOnline] = useState("");
   const [region, setRegion] = useState("");
   const [showRegion, setShowRegion] = useState(false);
-  const [result, setResult] = useState(null);
+  const [otherInstrument, setOtherInstrument] = useState("")
 
   const handleOnlineChange = (value) => {
     setOnline(value);
-    if (value === "Yes" || value === "どちらでも") {
+    if (value !== "Yes") {
       setShowRegion(true);
     } else {
       setShowRegion(false);
@@ -22,24 +22,23 @@ const DiagnosticPage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // 診断結果を設定
-    setResult({
-      楽器: instrument,
-      目標: goal,
-      レベル: level,
-      ジャンル: genre,
-      オンライン: online,
-      地域: showRegion ? region : "N/A",
-    });
+  // 全ての入力が有効か確認
+  const isFormValid = () => {
+    return (
+      instrument &&
+      goal &&
+      level &&
+      genre &&
+      online &&
+      (showRegion ? region : true) // regionはオンラインの場合のみ必須
+    );
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">診断ページ</h1>
-        <form onSubmit={handleSubmit}>
+        <form>
           {/* 楽器 */}
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="instrument">
@@ -58,6 +57,18 @@ const DiagnosticPage = () => {
               <option value="チェロ">チェロ</option>
               <option value="その他">その他</option>
             </select>
+
+            {/* 「その他」の場合にテキスト入力欄を表示 */}
+            {instrument === "その他" && (
+              <input
+                type="text"
+                placeholder="具体的に入力してください"
+                value={otherInstrument} // otherInstrument用のstateを別途追加
+                onChange={(e) => setOtherInstrument(e.target.value)}
+                required
+                className="w-full border border-gray-300 p-2 rounded mt-2"
+              />
+            )}
           </div>
 
           {/* 目標 */}
@@ -78,7 +89,9 @@ const DiagnosticPage = () => {
 
           {/* レベル */}
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">レベル<span className="text-red-500">*</span></label>
+            <label className="block text-gray-700 mb-2">
+              レベル<span className="text-red-500">*</span>
+            </label>
             <div className="flex space-x-4">
               {[1, 2, 3, 4, 5].map((num) => (
                 <label key={num} className="flex items-center">
@@ -119,7 +132,9 @@ const DiagnosticPage = () => {
 
           {/* オンライン */}
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">オンライン<span className="text-red-500">*</span></label>
+            <label className="block text-gray-700 mb-2">
+              オンライン<span className="text-red-500">*</span>
+            </label>
             <div className="flex space-x-4">
               {["Yes", "No", "どちらでも"].map((option) => (
                 <label key={option} className="flex items-center">
@@ -161,27 +176,17 @@ const DiagnosticPage = () => {
           )}
 
           {/* 診断結果ボタン */}
-          <button
-            type="submit"
-            className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600 transition-colors"
+          <Link
+            href="/teachers"
+            className={`w-full text-center block p-2 rounded transition-colors ${
+              isFormValid()
+                ? "bg-teal-500 text-white hover:bg-teal-600"
+                : "bg-gray-300 text-gray-500 pointer-events-none"
+            }`}
           >
-            診断結果を表示
-          </button>
+            先生とマッチング
+          </Link>
         </form>
-
-        {/* 診断結果の表示 */}
-        {result && (
-          <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded">
-            <h2 className="text-xl font-semibold mb-2">診断結果</h2>
-            <ul className="list-disc list-inside">
-              {Object.entries(result).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {value}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </div>
   );
