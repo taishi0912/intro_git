@@ -1,24 +1,21 @@
-"use client"; // Next.jsでクライアントサイドレンダリングを使用することを明示
+"use client";
 
-import Link from "next/link"; // 他のページへのリンクを作成するためのNext.jsコンポーネント
-import { useState } from "react"; // ReactのState管理を行うフック
+import Link from "next/link";
+import { useState } from "react";
 
-/**
- * 音楽講師とのマッチングのための診断フォームコンポーネント
- */
 const DiagnosticPage = () => {
-  // ユーザー入力を管理するためのstate
-  const [instrument, setInstrument] = useState(""); // 楽器選択
-  const [goal, setGoal] = useState(""); // ユーザーの目標
-  const [level, setLevel] = useState("1"); // レベル選択（1-5）
-  const [genre, setGenre] = useState(""); // 音楽ジャンル
-  const [online, setOnline] = useState(""); // オンライン/オフライン選択
-  const [region, setRegion] = useState(""); // 地域選択（オフライン時のみ必要）
-  const [showRegion, setShowRegion] = useState(false); // 地域選択を表示するかどうか
-  const [otherInstrument, setOtherInstrument] = useState(""); // 「その他」の楽器を入力
-  const [instructionPeriod, setInstructionPeriod] = useState(""); // 指導期間の選択
-  const [customPeriod, setCustomPeriod] = useState(""); // ユーザーがカスタムで入力する指導期間
-  const [showCustomPeriod, setShowCustomPeriod] = useState(false); // カスタム期間入力を表示するかどうか
+  const [instrument, setInstrument] = useState("");
+  const [goal, setGoal] = useState("");
+  const [level, setLevel] = useState("1");
+  const [genre, setGenre] = useState("");
+  const [online, setOnline] = useState("");
+  const [region, setRegion] = useState("");
+  const [showRegion, setShowRegion] = useState(false);
+  const [otherInstrument, setOtherInstrument] = useState("");
+  const [otherGenre, setOtherGenre] = useState("");
+  const [instructionPeriod, setInstructionPeriod] = useState("");
+  const [customPeriod, setCustomPeriod] = useState("");
+  const [showCustomPeriod, setShowCustomPeriod] = useState(false);
 
   /**
    * オンライン/オフラインの選択時に地域選択を制御する関数
@@ -26,8 +23,8 @@ const DiagnosticPage = () => {
    */
   const handleOnlineChange = (value) => {
     setOnline(value);
-    setShowRegion(value !== "Yes"); // オンラインでない場合のみ地域選択を表示
-    if (value === "Yes") setRegion(""); // オンラインの場合、地域をリセット
+    setShowRegion(value !== "Yes");
+    if (value === "Yes") setRegion("");
   };
 
   /**
@@ -188,6 +185,16 @@ const DiagnosticPage = () => {
               <option value="クラシック">クラシック</option>
               <option value="その他">その他</option>
             </select>
+            {/* 「その他」が選択された場合の追加入力フィールド */}
+            {genre === "その他" && (
+              <input
+                type="text"
+                placeholder="具体的に入力してください"
+                value={otherGenre}
+                onChange={(e) => setOtherGenre(e.target.value)}
+                className="w-full mt-3 border border-gray-300 p-3 rounded focus:ring-2 focus:ring-pink-400 focus:outline-none transition-shadow placeholder-gray-600"
+              />
+            )}
           </div>
 
           {/* オンライン選択 */}
@@ -240,8 +247,8 @@ const DiagnosticPage = () => {
           <Link
             href="/teachers"
             className={`w-full text-center block py-3 rounded-lg transition-colors ${isFormValid()
-                ? "bg-pink-400 text-white hover:bg-pink-500"
-                : "bg-gray-300 text-gray-500 pointer-events-none"
+              ? "bg-pink-400 text-white hover:bg-pink-500"
+              : "bg-gray-300 text-gray-500 pointer-events-none"
               }`}
           >
             先生とマッチング
