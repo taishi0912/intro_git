@@ -1,8 +1,9 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const DiagnosticPage = () => {
+  const router = useRouter();
   const [instrument, setInstrument] = useState("");
   const [goal, setGoal] = useState("");
   const [level, setLevel] = useState("1");
@@ -10,10 +11,8 @@ const DiagnosticPage = () => {
   const [online, setOnline] = useState("");
   const [region, setRegion] = useState("");
   const [showRegion, setShowRegion] = useState(false);
-  const [otherInstrument, setOtherInstrument] = useState("")
-  const [instructionPeriod, setInstructionPeriod] = useState("");
-  const [customPeriod, setCustomPeriod] = useState("");
-  const [showCustomPeriod, setShowCustomPeriod] = useState(false);
+  const [otherInstrument, setOtherInstrument] = useState("");
+  const [teacher, setTeacher] = useState(""); // 先生の選択用のstateを追加
 
   const handleOnlineChange = (value) => {
     setOnline(value);
@@ -24,27 +23,13 @@ const DiagnosticPage = () => {
       setRegion("");
     }
   };
-  const handleInstructionPeriodChange = (value) => {
-    setInstructionPeriod(value);
-    if (value === "その他") {
-      setShowCustomPeriod(true);
-    } else {
-      setShowCustomPeriod(false);
-      setCustomPeriod("");
-    }
-  };
 
-  // 全ての入力が有効か確認
-  const isFormValid = () => {
-    return (
-      instrument &&
-      goal &&
-      level &&
-      genre &&
-      online &&
-      (showRegion ? region : true) // regionはオンラインの場合のみ必須
-    );
-  };
+  // 先生が選択されたときに遷移
+  useEffect(() => {
+    if (teacher) {
+      router.push("/learning-plan"); // 学習プランの画面に遷移
+    }
+  }, [teacher, router]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -54,7 +39,7 @@ const DiagnosticPage = () => {
           {/* 楽器 */}
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="instrument">
-              楽器<span className="text-red-500">*</span>
+              楽器<span className="text-red-500"></span>
             </label>
             <select
               id="instrument"
@@ -69,13 +54,11 @@ const DiagnosticPage = () => {
               <option value="チェロ">チェロ</option>
               <option value="その他">その他</option>
             </select>
-
-            {/* 「その他」の場合にテキスト入力欄を表示 */}
             {instrument === "その他" && (
               <input
                 type="text"
                 placeholder="具体的に入力してください"
-                value={otherInstrument} // otherInstrument用のstateを別途追加
+                value={otherInstrument}
                 onChange={(e) => setOtherInstrument(e.target.value)}
                 required
                 className="w-full border border-gray-300 p-2 rounded mt-2"
@@ -98,43 +81,6 @@ const DiagnosticPage = () => {
               className="w-full border border-gray-300 p-2 rounded"
             />
           </div>
-          {/* 指導期間 */}
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="instructionPeriod">
-              指導期間<span className="text-red-500">*</span>
-            </label>
-            <select
-              id="instructionPeriod"
-              value={instructionPeriod}
-              onChange={(e) => handleInstructionPeriodChange(e.target.value)}
-              required
-              className="w-full border border-gray-300 p-2 rounded"
-            >
-              <option value="">選択してください</option>
-              <option value="1ヶ月">1ヶ月</option>
-              <option value="3ヶ月">3ヶ月</option>
-              <option value="6ヶ月">6ヶ月</option>
-              <option value="その他">その他</option>
-            </select>
-          </div>
-
-          {/* その他の指導期間 */}
-          {showCustomPeriod && (
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="customPeriod">
-                指導期間を入力してください<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="customPeriod"
-                value={customPeriod}
-                onChange={(e) => setCustomPeriod(e.target.value)}
-                required={showCustomPeriod}
-                placeholder="例: 2ヶ月"
-                className="w-full border border-gray-300 p-2 rounded"
-              />
-            </div>
-          )}
 
           {/* レベル */}
           <div className="mb-4">
@@ -224,17 +170,24 @@ const DiagnosticPage = () => {
             </div>
           )}
 
-          {/* 診断結果ボタン */}
-          <Link
-            href="/teachers"
-            className={`w-full text-center block p-2 rounded transition-colors ${
-              isFormValid()
-                ? "bg-teal-500 text-white hover:bg-teal-600"
-                : "bg-gray-300 text-gray-500 pointer-events-none"
-            }`}
-          >
-            先生とマッチング
-          </Link>
+          {/* 先生選択 */}
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2" htmlFor="teacher">
+              先生選択<span className="text-red-500">*</span>
+            </label>
+            <select
+              id="teacher"
+              value={teacher}
+              onChange={(e) => setTeacher(e.target.value)} // 先生が選択された際にstateを更新
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            >
+              <option value="">選択してください</option>
+              <option value="先生1">先生1</option>
+              <option value="先生2">先生2</option>
+              <option value="先生3">先生3</option>
+            </select>
+          </div>
         </form>
       </div>
     </div>
