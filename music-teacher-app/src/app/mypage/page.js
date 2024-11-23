@@ -42,7 +42,6 @@ const MyPage = () => {
     },
   ];
 
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-2xl">
@@ -51,7 +50,7 @@ const MyPage = () => {
         <div className="mb-4 text-center">
           <img
             src={userImage}
-            alt="/images/Taro.png"
+            alt="ユーザーの画像"
             className="w-32 h-32 rounded-full mx-auto mb-4" // 画像を円形にするスタイル
           />
           <h2 className="text-lg font-semibold">ユーザー情報</h2>
@@ -71,13 +70,19 @@ const MyPage = () => {
           <h2 className="text-lg font-semibold mb-2">マッチング履歴</h2>
           <ul className="list-disc ml-5">
             {matchingHistory.map((entry, index) => (
-              <li key={index}>
-                {entry.date}: 
-                {entry.result}:
-                {entry.background}:
-                {entry.experience}:
-                {entry.age}:
-                {entry.fee}
+              <li key={index} className="mb-4"> {/* 各履歴の間にマージンを追加 */}
+                <img
+                  src={entry.photo}
+                  alt={entry.name}
+                  className="w-20 h-20 rounded-full mb-2" // 画像を円形にするスタイル
+                />
+                <div>
+                  <strong>{entry.name}</strong>（{entry.age}歳）<br />
+                  {entry.date}: {entry.result}<br />
+                  {entry.background}<br />
+                  経験年数: {entry.experience}年<br />
+                  料金: ¥{entry.fee} / 時間
+                </div>
               </li>
             ))}
           </ul>
