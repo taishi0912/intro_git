@@ -11,6 +11,9 @@ const DiagnosticPage = () => {
   const [region, setRegion] = useState("");
   const [showRegion, setShowRegion] = useState(false);
   const [otherInstrument, setOtherInstrument] = useState("")
+  const [instructionPeriod, setInstructionPeriod] = useState("");
+  const [customPeriod, setCustomPeriod] = useState("");
+  const [showCustomPeriod, setShowCustomPeriod] = useState(false);
 
   const handleOnlineChange = (value) => {
     setOnline(value);
@@ -19,6 +22,15 @@ const DiagnosticPage = () => {
     } else {
       setShowRegion(false);
       setRegion("");
+    }
+  };
+  const handleInstructionPeriodChange = (value) => {
+    setInstructionPeriod(value);
+    if (value === "その他") {
+      setShowCustomPeriod(true);
+    } else {
+      setShowCustomPeriod(false);
+      setCustomPeriod("");
     }
   };
 
@@ -86,6 +98,43 @@ const DiagnosticPage = () => {
               className="w-full border border-gray-300 p-2 rounded"
             />
           </div>
+          {/* 指導期間 */}
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2" htmlFor="instructionPeriod">
+              指導期間<span className="text-red-500">*</span>
+            </label>
+            <select
+              id="instructionPeriod"
+              value={instructionPeriod}
+              onChange={(e) => handleInstructionPeriodChange(e.target.value)}
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            >
+              <option value="">選択してください</option>
+              <option value="1ヶ月">1ヶ月</option>
+              <option value="3ヶ月">3ヶ月</option>
+              <option value="6ヶ月">6ヶ月</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          {/* その他の指導期間 */}
+          {showCustomPeriod && (
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2" htmlFor="customPeriod">
+                指導期間を入力してください<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="customPeriod"
+                value={customPeriod}
+                onChange={(e) => setCustomPeriod(e.target.value)}
+                required={showCustomPeriod}
+                placeholder="例: 2ヶ月"
+                className="w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
+          )}
 
           {/* レベル */}
           <div className="mb-4">

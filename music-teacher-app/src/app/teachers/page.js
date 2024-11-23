@@ -7,7 +7,7 @@ import TeacherCard from '../../components/TeacherCard';
 const teachersData = [
   {
     id: 1,
-    photo: '/images/teacher1.jpg',
+    photo: '/images/Taro.png',
     name: '山田 太郎',
     background: '東京音楽大学卒業、ジャズピアニスト',
     experience: 5,
@@ -17,7 +17,7 @@ const teachersData = [
   },
   {
     id: 2,
-    photo: '/images/teacher2.jpg',
+    photo: '/images/Hanako.png',
     name: '佐藤 花子',
     background: '名古屋音楽院卒業、クラシックバイオリニスト',
     experience: 8,
@@ -67,7 +67,7 @@ const TeachersPage = () => {
               .filter((teacher) => selectedTeachers.includes(teacher.id))
               .map((teacher) => (
                 <li key={teacher.id}>{teacher.name}</li>
-              ))}
+              ))}   
           </ul>
         </div>
       )}
