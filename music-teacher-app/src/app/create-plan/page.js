@@ -76,8 +76,8 @@ const LearningPlanPage = ({ searchParams }) => {
         </p>
 
         <div className="mt-8 text-center">
-          <Link href="/" passHref>
-            ホームに戻る
+          <Link href="/mypage" passHref>
+            マイページに戻る
           </Link>
         </div>
       </div>
