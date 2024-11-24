@@ -60,56 +60,66 @@ const DiagnosticPage = () => {
    * フォーム送信時のハンドラ
    * @param {React.FormEvent} e - フォーム送信イベント
    */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    // Prevent multiple submissions
-    if (isSubmitting) return;
 
-    setIsSubmitting(true);
-    setErrorMessage("");
-
-    // Prepare the data
-    const data = {
-      instrument: instrument === "その他" ? otherInstrument : instrument,
-      level: level,
-      goal: goal,
-      time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
-      genre: genre === "その他" ? otherGenre : genre,
-      online: online,
-      region: showRegion ? region : null,
-      // Add other fields if necessary
-    };
-
-    try {
-      const response = await fetch("https://your-backend-api.com/endpoint", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        // Handle HTTP errors
-        const errorData = await response.json();
-        throw new Error(errorData.message || "予期せぬエラーが発生しました。");
-      }
-
-      // Optionally, handle the response data
-      const result = await response.json();
-      console.log("Success:", result);
-
-      // Navigate to /teachers upon successful submission
-      router.push("/teachers");
-    } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage(error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   // Prevent multiple submissions
+  //   if (isSubmitting) return;
+  
+  //   setIsSubmitting(true);
+  //   setErrorMessage("");
+  
+  //   // Prepare the data
+  //   const data = {
+  //     inputs: {
+  //       instrument: instrument === "その他" ? otherInstrument : instrument,
+  //       level: level,
+  //       goal: goal,
+  //       time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
+  //       genre: genre === "その他" ? otherGenre : genre,
+  //     },
+  //     response_mode: "blocking", // Ensures the response is returned immediately
+  //     user: "user-123", // Optional: Use a unique identifier for the user
+  //   };
+    
+  
+    // try {
+    //   const response = await fetch("https://api.dify.ai/v1/completion-messages", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer app-C9BkndzIHUluQyXMZdomT8N1`, // Replace with your actual API key
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+  
+    //   if (!response.ok) {
+    //     // Handle HTTP errors
+    //     const errorData = await response.json();
+    //     throw new Error(errorData.message || "予期せぬエラーが発生しました。");
+    //   }
+  
+    //   // Optionally, handle the response data
+    //   const result = await response.json();
+    //   console.log("Success:", result);
+  
+    //   // Optionally, process the API response, e.g., display the generated practice plan
+    //   alert(`練習計画: ${result.answer}`);
+  
+    //   // Navigate to /teachers upon successful submission (if needed)
+    //   router.push("/teachers");
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setErrorMessage(error.message);
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
-
+  
+ 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-gray-100 flex items-center justify-center p-6">
       {/* フォームを囲むコンテナ */}
