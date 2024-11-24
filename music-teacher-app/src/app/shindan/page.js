@@ -18,7 +18,7 @@ const DiagnosticPage = () => {
   const [showCustomPeriod, setShowCustomPeriod] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [gakki, setgakki] = useState("");
   const router = useRouter();
 
   /**
@@ -39,6 +39,9 @@ const DiagnosticPage = () => {
     setInstructionPeriod(value);
     setShowCustomPeriod(value === "その他"); // 「その他」が選択された場合のみカスタム入力を表示
     if (value !== "その他") setCustomPeriod(""); // 「その他」でない場合、カスタム入力をリセット
+  };
+  const handlegakkiChange = (value) => {
+    setgakki(value);
   };
 
   /**
@@ -76,7 +79,7 @@ const DiagnosticPage = () => {
       goal: goal,
       time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
       genre: genre === "その他" ? otherGenre : genre,
-      
+
       // Add other fields if necessary
     };
 
@@ -89,19 +92,21 @@ const DiagnosticPage = () => {
         body: JSON.stringify(data),
       });
 
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get("content-type");
 
       if (!response.ok) {
-        if (contentType && contentType.includes('application/json')) {
+        if (contentType && contentType.includes("application/json")) {
           const errorData = await response.json();
-          throw new Error(errorData.message || "予期せぬエラーが発生しました。");
+          throw new Error(
+            errorData.message || "予期せぬエラーが発生しました。"
+          );
         } else {
           const errorText = await response.text();
           throw new Error(`Error: ${errorText}`);
         }
       }
 
-      if (contentType && contentType.includes('application/json')) {
+      if (contentType && contentType.includes("application/json")) {
         const result = await response.json();
         console.log("Success:", result);
 
@@ -188,9 +193,7 @@ const DiagnosticPage = () => {
             <select
               id="instructionPeriod"
               value={instructionPeriod}
-              onChange={(e) =>
-                handleInstructionPeriodChange(e.target.value)
-              }
+              onChange={(e) => handleInstructionPeriodChange(e.target.value)}
               className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-pink-400 focus:outline-none transition-shadow"
             >
               <option value="">選択してください</option>
@@ -264,6 +267,28 @@ const DiagnosticPage = () => {
               />
             )}
           </div>
+          {/*楽器の有無*/}
+          <div className="mb-6">
+            <label className="block text-gray-900 font-semibold mb-2">
+              楽器の所持<span className="text-red-500">*</span>
+            </label>
+            <div className="flex justify-between">
+              {["Yes", "No"].map((option) => (
+                <label key={option} className="flex items-center text-gray-900">
+                  <input
+                    type="radio"
+                    name="gakki"
+                    value={option}
+                    checked={gakki === option}
+                    className="mr-2"
+                    onChange={(e) => handlegakkiChange(e.target.value)}
+                  />
+                  {option}
+                  {/*"Yes", "No"*/}
+                </label>
+              ))}
+            </div>
+          </div>
 
           {/* オンライン選択 */}
           <div className="mb-6">
@@ -272,10 +297,7 @@ const DiagnosticPage = () => {
             </label>
             <div className="flex justify-between">
               {["Yes", "No", "どちらでも"].map((option) => (
-                <label
-                  key={option}
-                  className="flex items-center text-gray-900"
-                >
+                <label key={option} className="flex items-center text-gray-900">
                   <input
                     type="radio"
                     name="online"
