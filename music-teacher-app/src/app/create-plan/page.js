@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
+import { FaArrowLeft } from "react-icons/fa"; // 戻るボタン用アイコンをインポート
 
 const LearningPlanPage = () => {
   const [savedData, setSavedData] = useState(null);
@@ -71,33 +72,56 @@ const LearningPlanPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="text-center mt-10">プランを作成しています</div>;
+    return (
+      <div className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-pink-200 w-full max-w-md text-center">
+          <h2 className="text-xl font-semibold text-pink-600 mb-4">学習プランを作成しています...</h2>
+          <div className="loader mx-auto"></div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-center mt-10 text-red-500">エラー: {error}</div>;
+    return (
+      <div className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-pink-200 w-full max-w-md text-center">
+          <h2 className="text-xl font-semibold text-red-500 mb-4">エラー</h2>
+          <p className="text-gray-700 mb-6">{error}</p>
+          <Link href="/mypage">
+            <button className="bg-pink-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-pink-600 transition duration-300 flex items-center justify-center">
+              <FaArrowLeft className="mr-2" />
+              マイページに戻る
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-6 text-center">学習プラン</h1>
+    <div className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
+      <div className="bg-white p-10 rounded-2xl shadow-lg border border-pink-200 w-full max-w-4xl">
+        <h1 className="text-3xl font-bold text-pink-600 mb-6 text-center">学習プラン</h1>
         {learningPlan ? (
           <>
-            <ReactMarkdown className="prose prose-lg">
-              {learningPlan}
-            </ReactMarkdown>
+            <div className="prose prose-lg max-w-none mb-8">
+              <ReactMarkdown>
+                {learningPlan}
+              </ReactMarkdown>
+            </div>
 
-            <div className="mt-8 text-center">
-              <Link href="/mypage" passHref>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded">
-                  マイページに戻る
+            <div className="text-center">
+              <Link href="/mypage">
+                <button className="bg-pink-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-pink-600 transition duration-300 flex items-center justify-center space-x-2">
+                  <FaArrowLeft className="text-lg" />
+                  <span>マイページに戻る</span>
                 </button>
               </Link>
             </div>
           </>
         ) : (
-          <p className="text-center">学習プランを生成できませんでした。</p>
+          <p className="text-center text-gray-700">学習プランを生成できませんでした。</p>
         )}
       </div>
     </div>
