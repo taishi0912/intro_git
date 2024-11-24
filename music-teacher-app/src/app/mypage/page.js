@@ -11,12 +11,12 @@ const MyPage = () => {
     {
       date: "2024年10月01日",
       result: "マッチング成功",
-      photo: "/images/Taro.png",
+      photo: "/images/Nkou.jpg",
       name: "山田 太郎",
-      background: "東京音楽大学卒業、ジャズピアニスト",
-      experience: 5,
+      background: "N高等学校卒業、カスタネット",
+      experience: 15,
       age: 30,
-      fee: 3000,
+      fee: 10000,
       online: true,
     },
     {
@@ -33,12 +33,12 @@ const MyPage = () => {
     {
       date: "2024年08月30日",
       result: "マッチング成功",
-      photo: "/images/Taro.png",
-      name: "山田 太郎",
-      background: "東京音楽大学卒業、ジャズピアニスト",
+      photo: "/images/Kento.jpg",
+      name: "山崎 賢人",
+      background: "コロラド州立音楽大学卒業、ブルースギタリスト",
       experience: 5,
       age: 30,
-      fee: 3000,
+      fee: 2000,
       online: true,
     },
   ];
