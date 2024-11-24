@@ -71,7 +71,7 @@ const LearningPlanPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="text-center mt-10">読み込み中...</div>;
+    return <div className="text-center mt-10">プランを作成しています</div>;
   }
 
   if (error) {
