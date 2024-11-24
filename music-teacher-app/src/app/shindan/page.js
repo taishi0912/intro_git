@@ -48,7 +48,7 @@ const DiagnosticPage = () => {
       level &&
       genre &&
       online &&
-      (showRegion ? region : true) // 地域選択が必要な場合はregionもチェック
+      (showRegion ? region : true)
     );
   };
 
