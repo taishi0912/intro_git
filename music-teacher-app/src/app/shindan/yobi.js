@@ -63,60 +63,60 @@ const DiagnosticPage = () => {
 
 
   
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-  //   // Prevent multiple submissions
-  //   if (isSubmitting) return;
+    // Prevent multiple submissions
+    if (isSubmitting) return;
   
-  //   setIsSubmitting(true);
-  //   setErrorMessage("");
+    setIsSubmitting(true);
+    setErrorMessage("");
   
-  //   // Prepare the data
-  //   const data = {
-  //     inputs: {
-  //       instrument: instrument === "その他" ? otherInstrument : instrument,
-  //       level: level,
-  //       goal: goal,
-  //       time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
-  //       genre: genre === "その他" ? otherGenre : genre,
-  //     },
-  //     response_mode: "blocking", // Ensures the response is returned immediately
-  //     user: "user-123", // Optional: Use a unique identifier for the user
-  //   };
+    // Prepare the data
+    const data = {
+      inputs: {
+        instrument: instrument === "その他" ? otherInstrument : instrument,
+        level: level,
+        goal: goal,
+        time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
+        genre: genre === "その他" ? otherGenre : genre,
+      },
+      response_mode: "blocking", // Ensures the response is returned immediately
+      user: "user-123", // Optional: Use a unique identifier for the user
+    };
     
   
-    // try {
-    //   const response = await fetch("https://api.dify.ai/v1/completion-messages", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer app-C9BkndzIHUluQyXMZdomT8N1`, // Replace with your actual API key
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
+    try {
+      const response = await fetch("https://api.dify.ai/v1/completion-messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer app-C9BkndzIHUluQyXMZdomT8N1`, // Replace with your actual API key
+        },
+        body: JSON.stringify(data),
+      });
   
-    //   if (!response.ok) {
-    //     // Handle HTTP errors
-    //     const errorData = await response.json();
-    //     throw new Error(errorData.message || "予期せぬエラーが発生しました。");
-    //   }
+      if (!response.ok) {
+        // Handle HTTP errors
+        const errorData = await response.json();
+        throw new Error(errorData.message || "予期せぬエラーが発生しました。");
+      }
   
-    //   // Optionally, handle the response data
-    //   const result = await response.json();
-    //   console.log("Success:", result);
+      // Optionally, handle the response data
+      const result = await response.json();
+      console.log("Success:", result);
   
-    //   // Optionally, process the API response, e.g., display the generated practice plan
-    //   alert(`練習計画: ${result.answer}`);
+      // Optionally, process the API response, e.g., display the generated practice plan
+      alert(`練習計画: ${result.answer}`);
   
-    //   // Navigate to /teachers upon successful submission (if needed)
-    //   router.push("/teachers");
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   setErrorMessage(error.message);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      // Navigate to /teachers upon successful submission (if needed)
+      router.push("/teachers");
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
  
