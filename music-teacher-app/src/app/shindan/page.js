@@ -76,13 +76,12 @@ const DiagnosticPage = () => {
       goal: goal,
       time: instructionPeriod === "その他" ? customPeriod : instructionPeriod,
       genre: genre === "その他" ? otherGenre : genre,
-      online: online,
-      region: showRegion ? region : null,
+      
       // Add other fields if necessary
     };
 
     try {
-      const response = await fetch("https://your-backend-api.com/endpoint", {
+      const response = await fetch("http://127.0.0.1:5000/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,18 +89,27 @@ const DiagnosticPage = () => {
         body: JSON.stringify(data),
       });
 
+      const contentType = response.headers.get('content-type');
+
       if (!response.ok) {
-        // Handle HTTP errors
-        const errorData = await response.json();
-        throw new Error(errorData.message || "予期せぬエラーが発生しました。");
+        if (contentType && contentType.includes('application/json')) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "予期せぬエラーが発生しました。");
+        } else {
+          const errorText = await response.text();
+          throw new Error(`Error: ${errorText}`);
+        }
       }
 
-      // Optionally, handle the response data
-      const result = await response.json();
-      console.log("Success:", result);
+      if (contentType && contentType.includes('application/json')) {
+        const result = await response.json();
+        console.log("Success:", result);
 
-      // Navigate to /teachers upon successful submission
-      router.push("/teachers");
+        // Navigate to /teachers upon successful submission
+        router.push("/teachers");
+      } else {
+        throw new Error("Invalid response format.");
+      }
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage(error.message);
