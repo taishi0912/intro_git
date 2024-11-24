@@ -73,7 +73,7 @@ const MyPage = () => {
           <Link href="/direct-messages">
             <button className="w-full px-6 py-3 bg-pink-300 text-pink-800 font-semibold rounded-lg shadow-md hover:bg-pink-400 transition duration-300 flex items-center justify-center space-x-2">
               <FaPaperPlane className="text-lg" />
-              <span>DMに飛ぶ</span>
+              <span>DM</span>
             </button>
           </Link>
         </div>

@@ -27,7 +27,7 @@ export default function MatchingSuccess() {
               <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-pink-300 group-hover:translate-x-0 group-hover:translate-y-0 rounded-lg"></span>
               <span className="relative inline-block w-full px-6 py-3 text-lg font-semibold text-white bg-pink-300 border border-current rounded-lg group-hover:bg-white group-hover:text-pink-300 transition duration-300 ease-out shadow-md flex items-center justify-center space-x-2">
                 <FaPaperPlane className="text-xl" />
-                <span>DMに飛ぶ</span>
+                <span>DM</span>
               </span>
             </div>
           </Link>
