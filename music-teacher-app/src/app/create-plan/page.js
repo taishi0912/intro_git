@@ -4,6 +4,34 @@ import Link from "next/link";
 
 const LearningPlanPage = ({ searchParams }) => {
   // const teacher = searchParams?.teacher || "未指定"; // URLからクエリパラメータを取得
+  const handleSaveData = async () => {
+    const data = {
+      instrument: "ピアノ",
+      goal: "コンサート出場",
+      level: 1,
+      genre: "クラシック",
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(result.message); // 保存成功メッセージ
+      } else {
+        alert("データ保存に失敗しました");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("エラーが発生しました");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -80,6 +108,16 @@ const LearningPlanPage = ({ searchParams }) => {
             マイページに戻る
           </Link>
         </div>
+
+        <div className="mt-8 text-center">
+          <button
+            onClick={handleSaveData}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            データを保存する
+          </button>
+        </div>
+
       </div>
     </div>
   );
