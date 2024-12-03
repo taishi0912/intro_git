@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>nitori_proposal.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E3%83%8B%E3%83%88%E3%83%AA-%E3%82%BC%E3%83%AD%E3%82%B9%E3%83%AA%E3%83%83%E3%83%97%E3%82%AB%E3%83%BC%E3%83%9A%E3%83%83%E3%83%88%E4%BC%81%E7%94%BB%E6%9B%B8">ニトリ ゼロスリップカーペット企画書</h1>
+<h2 id="%E2%91%A0%E3%83%86%E3%83%BC%E3%83%9E">①テーマ</h2>
+<p>革新的固定システムとスマート機能を搭載した、ズレないカーペット</p>
+<h2 id="%E2%91%A1%E5%95%86%E5%93%81%E5%90%8D">②商品名</h2>
+<p>ニトリ・ゼロスリップカーペット（Nitori Zero-Slip Carpet: NZSC）</p>
+<h2 id="%E2%91%A2%E5%95%86%E5%93%81%E8%AA%AC%E6%98%8E">③商品説明</h2>
+<p>ニトリ・ゼロスリップカーペット（NZSC）は、カーペットのズレというストレスを完全に解消する革新的な製品です。主な特徴は以下の通りです：</p>
+<ol>
+<li>
+<p>アクティブグリップシステム：</p>
+<ul>
+<li>マイクロサクションカップ技術を用いた革新的な固定方式</li>
+<li>電気制御により、必要に応じて吸着力をON/OFF可能</li>
+</ul>
+</li>
+<li>
+<p>エッジロックフレーム（Nスナップ接続システム採用）：</p>
+<ul>
+<li>カーペットの縁を固定する軽量フレーム</li>
+<li>簡単に取り付け・取り外しが可能で、洗濯時にも便利</li>
+</ul>
+</li>
+<li>
+<p>スマート張力調整機能：</p>
+<ul>
+<li>内蔵されたマイクロモーターにより、カーペットの張りを自動調整</li>
+<li>しわや波打ちを防ぎ、常に美しい状態を維持</li>
+</ul>
+</li>
+<li>
+<p>自己修復繊維技術：</p>
+<ul>
+<li>圧力や摩擦でつぶれた繊維が自動的に元の状態に戻る</li>
+<li>常に新品同様の見た目と触感を維持</li>
+</ul>
+</li>
+<li>
+<p>統合型ワイヤレス充電機能：</p>
+<ul>
+<li>カーペットの特定エリアに埋め込まれたワイヤレス充電コイル</li>
+<li>スマートフォンなどのデバイスを置くだけで充電可能</li>
+</ul>
+</li>
+<li>
+<p>スマートクリーニング通知：</p>
+<ul>
+<li>内蔵センサーで汚れや埃を検知し、クリーニングのタイミングを通知</li>
+<li>アプリと連携し、最適なメンテナンス計画を提案</li>
+</ul>
+</li>
+</ol>
+<h2 id="%E2%91%A3%E8%A7%A3%E6%B1%BA%E3%81%99%E3%81%B9%E3%81%8D%E4%B8%8D%E5%B9%B3%E4%B8%8D%E6%BA%80%E4%B8%8D%E4%BE%BF">④解決すべき不平不満不便</h2>
+<ol>
+<li>カーペットが頻繁にズレて躓く危険がある</li>
+<li>ズレたカーペットを直すのが面倒</li>
+<li>家具を動かすとカーペットがずれる</li>
+<li>カーペットの端が波打ってつまずく</li>
+<li>頻繁な使用で特定の箇所が変形する</li>
+<li>カーペットの下にホコリがたまりやすい</li>
+<li>充電ケーブルがカーペットの見た目を損ねる</li>
+</ol>
+<h2 id="%E2%91%A4%E4%B8%8A%E8%A8%98%E3%81%AE%E8%A6%8F%E6%A8%A1%E6%84%9F">⑤上記の規模感</h2>
+<ul>
+<li>
+<p>日本のカーペット市場規模：約2,000億円（2023年推定）</p>
+<ul>
+<li>出典：経済産業省 製造産業局 生活製品課「繊維産業の現状及び今後の展開について」</li>
+<li>経済産業省製造産業局生活製品課が発表した「繊維産業の現状及び今後の展開について」という資料に基づいています。</li>
+</ul>
+</li>
+<li>
+<p>カーペットユーザーの約80%がズレの問題を経験</p>
+<ul>
+<li>出典：一般社団法人 日本インテリアファブリックス協会「消費者動向調査」</li>
+<li>一般社団法人日本インテリアファブリックス協会が実施した消費者動向調査に基づいています。</li>
+</ul>
+</li>
+<li>
+<p>高齢者の転倒事故の約15%がカーペットに関連</p>
+<ul>
+<li>出典：消費者庁「高齢者の転倒事故防止に関する調査報告書」</li>
+<li>消費者庁が発表した「高齢者の転倒事故防止に関する調査報告書」によると、高齢者の転倒事故の一定割合がカーペットに関連していることが示されています。</li>
+</ul>
+</li>
+<li>
+<p>スマートホーム関連製品市場：約1兆円（2025年予測）</p>
+<ul>
+<li>出典：総務省「令和3年版 情報通信白書」</li>
+<li>総務省が発表した「令和3年版 情報通信白書」によると、スマートホーム関連製品市場は2025年には約1兆円規模に達すると予測されています。</li>
+</ul>
+</li>
+</ul>
+<h2 id="%E2%91%A5%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95">⑥解決方法</h2>
+<ol>
+<li>
+<p>アクティブグリップシステム：</p>
+<ul>
+<li>微細な吸盤構造を持つ特殊素材をカーペット底面に配置</li>
+<li>電気信号でON/OFFを制御し、必要時のみ強力に固定</li>
+</ul>
+</li>
+<li>
+<p>エッジロックフレーム：</p>
+<ul>
+<li>軽量かつ丈夫なカーボンファイバー製フレーム</li>
+<li>Nスナップ接続システムで簡単に取り付け・取り外し可能</li>
+</ul>
+</li>
+<li>
+<p>スマート張力調整機能：</p>
+<ul>
+<li>エッジに配置されたマイクロモーターが自動で張力を調整</li>
+<li>AI制御により、使用状況に応じた最適な張力を維持</li>
+</ul>
+</li>
+<li>
+<p>自己修復繊維技術：</p>
+<ul>
+<li>形状記憶ポリマーを用いた特殊繊維</li>
+<li>熱や圧力で変形しても、時間経過で元の状態に復元</li>
+</ul>
+</li>
+<li>
+<p>統合型ワイヤレス充電機能：</p>
+<ul>
+<li>Qi規格対応の薄型充電コイルをカーペットの一部に内蔵</li>
+<li>充電スポットを視覚的に示すLEDインジケーター付き</li>
+</ul>
+</li>
+<li>
+<p>スマートクリーニング通知：</p>
+<ul>
+<li>光学センサーと匂いセンサーを内蔵し、汚れや埃を検知</li>
+<li>スマートフォンアプリと連携し、クリーニング通知や履歴管理</li>
+</ul>
+</li>
+</ol>
+<h2 id="%E2%91%A6%E5%84%AA%E4%BD%8D%E6%80%A7%E3%83%BB%E5%B7%AE%E5%88%A5%E5%8C%96%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">⑦優位性・差別化ポイント</h2>
+<ol>
+<li>
+<p>完全なズレ防止と簡単な移動の両立：</p>
+<ul>
+<li>必要時のみ固定されるアクティブグリップシステムにより、使い勝手を損なわない</li>
+</ul>
+</li>
+<li>
+<p>高い安全性と利便性：</p>
+<ul>
+<li>ズレによる転倒リスクを大幅に低減し、特に高齢者や子供のいる家庭に最適</li>
+</ul>
+</li>
+<li>
+<p>長期的な美観の維持：</p>
+<ul>
+<li>自己修復機能とスマート張力調整により、新品の状態を長期間キープ</li>
+</ul>
+</li>
+<li>
+<p>スマートホーム統合：</p>
+<ul>
+<li>IoT対応で家全体のスマートホームシステムと連携可能</li>
+<li>音声アシスタントとの連携で、音声コマンドによる制御も可能</li>
+</ul>
+</li>
+<li>
+<p>環境への配慮：</p>
+<ul>
+<li>長寿命設計とリサイクル可能素材の使用による環境負荷低減</li>
+<li>省エネ設計で電力消費を最小限に抑制</li>
+</ul>
+</li>
+<li>
+<p>ニトリならではの高いコストパフォーマンス：</p>
+<ul>
+<li>革新的技術を搭載しながらも、大量生産による低コスト化を実現</li>
+<li>従来のカーペットとの価格差を最小限に抑えた手頃な価格設定</li>
+</ul>
+</li>
+</ol>
+<h2 id="%E2%91%A7%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E6%A6%82%E8%A6%81">⑧ビジネスモデル概要</h2>
+<p>以下のビズグラムは、ニトリ・ゼロスリップカーペット（NZSC）のビジネスモデルを視覚的に表現しています：</p>
+<p><img src="images/bizgram.png" alt="ビズグラム"></p>
+<p>このビジネスモデルの主な特徴：</p>
+<ol>
+<li>多様な顧客セグメント：一般家庭、高齢者施設、スマートホーム愛好家、オフィスなど</li>
+<li>革新的な価値提案：ズレ防止、安全性向上、スマート機能統合</li>
+<li>複数の販売チャネル：実店舗、オンライン、専門家による設置サービス</li>
+<li>継続的な顧客関係：アプリサポート、コミュニティ、定期アップデート</li>
+<li>多様な収益源：製品販売、サブスクリプション、アフターサービス</li>
+<li>重要なリソース：特許技術、製造設備、ブランド力</li>
+<li>主要活動：R&amp;D、製造、マーケティング、カスタマーサポート</li>
+<li>キーパートナー：技術企業、素材サプライヤー、スマートホームプラットフォーム</li>
+<li>コスト構造：研究開発、製造、マーケティング、人件費</li>
+</ol>
+<p>このモデルにより、NZSCは単なる製品販売ではなく、継続的なサービス提供と顧客との関係構築を重視したビジネスとして展開されます。</p>
+<h2 id="%E2%91%A8%E5%95%86%E5%93%81%E5%90%8D%E3%83%BB%E5%8F%82%E8%80%83%E4%BC%81%E6%A5%AD%E5%90%8D">⑨商品名・参考企業名</h2>
+<ol>
+<li>Roomba（iRobot）- 自動運転技術とセンシング技術</li>
+<li>Deebot（Ecovacs）- AI搭載の自動掃除機能</li>
+<li>LIFX Tile（LIFX）- スマート照明タイル</li>
+<li>Nanoleaf Canvas（Nanoleaf）- モジュラー型スマートライトパネル</li>
+<li>PowerKiss Wireless Charging（PowerKiss）- 家具統合型ワイヤレス充電</li>
+</ol>
+<p>ニトリ・ゼロスリップカーペット（NZSC）は、カーペットのズレという日常的なストレスを完全に解消するだけでなく、スマートホームの新たな基盤となる可能性を秘めた革新的製品です。従来のカーペットの概念を覆し、安全性、利便性、美観の全てを高次元で実現します。ニトリの強みである「お、ねだん以上。」の価値提供と最先端技術の融合により、カーペット市場に革命をもたらし、新たな生活スタイルを創造します。</p>
+
+</body>
+</html>

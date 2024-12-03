@@ -1,0 +1,347 @@
+/* モダンなポートフォリオスタイル */
+
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #4CAF50;
+    --background-color: #F8F9FA;
+    --text-color: #333333;
+    --header-height: 60px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+main {
+    margin-top: var(--header-height);
+    padding: 40px 5%;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+.section {
+    margin-bottom: 4rem;
+}
+
+/* プロジェクトカード */
+.project {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+}
+
+.project h2 {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    margin: 0;
+}
+
+.project-content {
+    padding: 1rem;
+}
+
+/* スキルセット */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-category {
+    flex: 1 1 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category h3 {
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+.skill-category ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.skill-category li {
+    background-color: var(--background-color);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* 詳細セクションの共通スタイル */
+.details {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.details.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.details h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.details p {
+    margin-bottom: 1rem;
+}
+
+.details ul,
+.details ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* プロジェクト詳細のスタイル */
+.project-details {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.project-details.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.project-details h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.project-details p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.project-details ul,
+.project-details ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-details li {
+    margin-bottom: 0.5rem;
+}
+
+.project-details .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-details .tech-item {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.project-details .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 アスペクト比 */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-details .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project-details .links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.project-details .links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.project-details .links a:hover {
+    background-color: #45a049;
+}
+
+/* 自己紹介詳細のスタイル */
+#about-details {
+    background-color: #e9ecef;
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* プログラミング歴詳細のスタイル */
+#programming-history-details {
+    background-color: #f1f3f5;
+    border-left: 4px solid #ffc107;
+}
+
+#programming-history-details .timeline-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--primary-color);
+}
+
+#programming-history-details .timeline-item h3 {
+    color: var(--secondary-color);
+}
+
+/* ボタン */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #5753D9;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header {
+        padding: 0 2%;
+    }
+
+    main {
+        padding: 20px 2%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .skill-category {
+        flex: 1 1 100%;
+    }
+}

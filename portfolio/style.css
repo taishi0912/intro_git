@@ -1,0 +1,926 @@
+/* モダンなポートフォリオスタイル */
+
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #4CAF50;
+    --background-color: #F8F9FA;
+    --text-color: #333333;
+    --header-height: 60px;
+}
+
+:root {
+    --side-margin: 10%;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --side-margin: 7%;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --side-margin: 5%;
+    }
+}
+
+body {
+
+
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    margin: 0 auto;
+    /* 中央揃え */
+    padding: 0 var(--side-margin);
+    max-width: 1400px;
+    /* 最大幅を広げる 最大幅を設定 */
+
+
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--side-margin);
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+main {
+    margin-top: var(--header-height);
+    padding: 40px 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+.section {
+    margin-bottom: 4rem;
+}
+
+/* プロジェクトカード */
+.project {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+}
+
+.project h2 {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    margin: 0;
+}
+
+
+
+/* プロジェクトカードのスタイルを追加 */
+.project-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+    width: calc(100% - 2rem);
+    /* 両側に1remずつのマージンを確保 */
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        width: 100%;
+        /* タブレットサイズでは幅いっぱいに */
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content p {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* スキルセット */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-category {
+    flex: 1 1 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category h3 {
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+.skill-category ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.skill-category li {
+    background-color: var(--background-color);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* メモメモメモメモメモメモメモ スキルグリッドのスタイルを追加 */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        /* タブレットサイズでは1列に */
+    }
+}
+
+.skill-category {
+    background-color: #f1f3f5;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.skill-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-item {
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* 詳細セクションの共通スタイル */
+.details {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.details.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.details h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.details p {
+    margin-bottom: 1rem;
+}
+
+.details ul,
+.details ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* プロジェクト詳細のスタイル */
+.project-details {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+/* メモメモメモメモメモメモメモ プロジェクト詳細のスタイルを追加 */
+.project-details {
+    display: none;
+    padding: 1rem;
+    background-color: #f1f3f5;
+    border-top: 1px solid #e9ecef;
+}
+
+.project-details.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.project-details h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.project-details p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.project-details ul,
+.project-details ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-details li {
+    margin-bottom: 0.5rem;
+}
+
+.project-details .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-details .tech-item {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.project-details .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 アスペクト比 */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-details .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project-details .links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.project-details .links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.project-details .links a:hover {
+    background-color: #45a049;
+}
+
+.project-details-button {
+    display: block;
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    text-align: center;
+}
+
+.project-details-button:hover {
+    background-color: #5753D9;
+}
+
+/* 自己紹介詳細のスタイル */
+#about-details {
+    background-color: #e9ecef;
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* プログラミング歴詳細のスタイル */
+#programming-history-details {
+    background-color: #f1f3f5;
+    border-left: 4px solid #ffc107;
+}
+
+#programming-history-details .timeline-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--primary-color);
+}
+
+#programming-history-details .timeline-item h3 {
+    color: var(--secondary-color);
+}
+
+/* ボタン */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #5753D9;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .project-content {
+        padding: 1.25rem;
+    }
+
+    .project-content p {
+        padding: 0 0.75rem;
+    }
+
+    .project-details-button {
+        width: calc(100% - 1.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-content {
+        padding: 1rem;
+    }
+
+    .project-content p {
+        padding: 0 0.5rem;
+    }
+
+    .project-details-button {
+        width: calc(100% - 1rem);
+    }
+}
+
+/* 全てのビデオコンテナに適用されるスタイル */
+.project-details .video-container,
+#career-quest .video-container,
+.video-container {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    aspect-ratio: 16 / 9 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* iframeを含む全ての動画要素に適用されるスタイル */
+.project-details .video-container iframe,
+#career-quest .video-container iframe,
+.video-container iframe,
+.video-container video,
+.video-container img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    border: none !important;
+}
+
+/* 特定のiframeスタイルのリセット */
+iframe[style] {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+}
+
+/* アップデート途中のアナウンス */
+.project-update-notice {
+    background-color: #e9ecef;
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.project-update-notice i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.project-update-notice p {
+    margin: 0;
+    font-style: italic;
+}
+
+/* ソーシャルリンクのスタイル */
+#social-links {
+    margin-top: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #5753D9;
+}
+
+/* スキルセットセクションの基本スタイル */
+.section#skills {
+    padding: 3rem 0;
+    background-color: var(--spotify-dark-gray);
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+/* スキルカテゴリーのグリッドレイアウト */
+#skills-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--spotify-medium-gray);
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+/* スキルカテゴリーのカードスタイル */
+.skill-category {
+    background-color: var(--spotify-dark-gray);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* カテゴリーヘッダー */
+.skill-category h3 {
+    color: var(--spotify-white);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--spotify-medium-gray);
+}
+
+/* スキルリストのスタイル */
+.skill-category ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.skill-category>ul>li {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--spotify-white);
+}
+
+.skill-category ul ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.skill-category ul ul li {
+    color: var(--spotify-light-gray);
+    font-weight: normal;
+    margin-bottom: 0.3rem;
+    position: relative;
+}
+
+.skill-category ul ul li::before {
+    content: "•";
+    color: var(--spotify-white);
+    position: absolute;
+    left: -1rem;
+}
+
+/* 詳細を見るボタン - ソーシャルアイコンと統一したスタイル */
+#skills button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+#skills button:hover {
+    background-color: #5753D9;
+}
+
+/* アニメーション */
+.skill-category {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* アニメーションディレイ */
+.skill-category:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.skill-category:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.skill-category:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.skill-category:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.skill-category:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.skill-category:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.skill-category:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    #skills-details {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .skill-category {
+        padding: 1rem;
+    }
+
+    .skill-category h3 {
+        font-size: 1.1rem;
+    }
+
+    #skills button {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+#news-topics {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.activities-container {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* フィーチャー記事スタイル */
+.featured-news {
+    background: linear-gradient(145deg, #6C63FF08, #6C63FF15);
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: #6C63FF;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.featured-news h3 {
+    color: #2d2d2d;
+    margin: 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+.featured-news p {
+    color: #666;
+    margin: 0.8rem 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* スクロール可能なアクティビティリスト */
+.activities-scroll {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    /* スクロールバーのスタイル */
+    scrollbar-width: thin;
+    scrollbar-color: #6C63FF #f0f0f0;
+}
+
+.activities-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activities-scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+
+.activities-scroll::-webkit-scrollbar-thumb {
+    background-color: #6C63FF;
+    border-radius: 3px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.activity-item:hover {
+    transform: translateX(5px);
+}
+
+.activity-date {
+    min-width: 80px;
+    color: #6C63FF;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.activity-content h4 {
+    color: #2d2d2d;
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+.activity-content p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.learn-more,
+.activity-content a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #6C63FF;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.learn-more:hover,
+.activity-content a:hover {
+    color: #4A45B3;
+}
+
+@media (max-width: 768px) {
+    #news-topics {
+        margin: 1.5rem;
+        padding: 1rem;
+    }
+
+    .activities-container {
+        height: 350px;
+    }
+
+    .activity-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .activity-date {
+        min-width: auto;
+    }
+}
+
+#social-links {
+    margin: 1rem 0;
+}
+
+#social-links h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-icons a svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* GitHubボタンの特別なスタイル */
+.social-icons a[href*="github"] {
+    background-color: #24292e;
+}
+
+/* Qiitaボタンの特別なスタイル */
+.social-icons a[href*="qiita"] {
+    background-color: #55c500;
+}
+
+.social-icons a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+    .social-icons {
+        flex-direction: column;
+    }
+
+    .social-icons a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
